@@ -20,6 +20,9 @@ const ListadoTareas = () => {
           tareasProyecto.map((tarea) => <Tarea tarea={tarea} />)
         )}
       </ul>
+      <button className="btn btn-eliminar" type="button">
+        Eliminar Proyecto &times;
+      </button>
     </>
   );
 };
