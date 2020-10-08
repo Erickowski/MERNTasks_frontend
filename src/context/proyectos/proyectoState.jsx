@@ -7,6 +7,11 @@ import { FORMULARIO_PROYECTO } from "../../types";
 const ProyectoState = (props) => {
   const initialState = {
     formulario: false,
+    proyectos: [
+      { id: 1, nombre: "Tienda Virtual" },
+      { id: 2, nombre: "Intranet" },
+      { id: 3, nombre: "Diseño de Sitio web" },
+    ],
   };
   // Dispatch para ejecutar las acciones
   const [state, dispatch] = useReducer(proyectoReducer, initialState);
@@ -18,7 +23,11 @@ const ProyectoState = (props) => {
   };
   return (
     <proyectContext.Provider
-      value={{ formulario: state.formulario, mostrarFormulario }}
+      value={{
+        formulario: state.formulario,
+        proyectos: state.proyectos,
+        mostrarFormulario,
+      }}
     >
       {props.children}
     </proyectContext.Provider>
