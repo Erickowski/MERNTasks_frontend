@@ -12,6 +12,7 @@ const ListadoProyectos = () => {
   // Validar que haya proyectos existentes
   useEffect(() => {
     obtenerProyectos();
+    // eslint-disable-next-line
   }, []);
   if (proyectos.length === 0) return <p>No hay proyectos aún.</p>;
   return (
