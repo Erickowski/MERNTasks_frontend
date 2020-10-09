@@ -1,6 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
+import proyectoContext from "../../context/proyectos/proyectoContext";
 
 const FormTarea = () => {
+  // Extraer proyecto activo de state inicial
+  const proyectosContext = useContext(proyectoContext);
+  const { proyecto } = proyectosContext;
+  //  Si no hay proyecto seleccionado
+  if (!proyecto) return null;
+
+  // Array destructuring para extraer el proyecto actual
+  const [proyectoActual] = proyecto;
   return (
     <div className="formulario">
       <form action="">
