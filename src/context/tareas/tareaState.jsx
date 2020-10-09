@@ -2,19 +2,25 @@ import React, { useReducer } from "react";
 import TareaContext from "./tareaContext";
 import TareaReducer from "./tareaReducer";
 
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA } from "../../types";
+import {
+  TAREAS_PROYECTO,
+  AGREGAR_TAREA,
+  VALIDAR_TAREA,
+  ELIMINAR_TAREA,
+} from "../../types";
 
 const TareaState = (props) => {
   const initialState = {
     tareas: [
-      { nombre: "Elegir Plataforma", estado: true, proyectoId: 1 },
-      { nombre: "Elegir Colores", estado: false, proyectoId: 1 },
+      { id: 1, nombre: "Elegir Plataforma", estado: true, proyectoId: 1 },
+      { id: 2, nombre: "Elegir Colores", estado: false, proyectoId: 1 },
       {
+        id: 3,
         nombre: "Elegir Plataformas de Pago",
         estado: false,
         proyectoId: 2,
       },
-      { nombre: "Elegir Hosting", estado: false, proyectoId: 3 },
+      { id: 4, nombre: "Elegir Hosting", estado: false, proyectoId: 3 },
     ],
     tareasproyecto: null,
     errortarea: false,
@@ -47,6 +53,14 @@ const TareaState = (props) => {
     });
   };
 
+  // Eliminar tarea por id
+  const eliminarTarea = (id) => {
+    dispatch({
+      type: ELIMINAR_TAREA,
+      payload: id,
+    });
+  };
+
   return (
     <TareaContext.Provider
       value={{
@@ -56,6 +70,7 @@ const TareaState = (props) => {
         obtenerTareas,
         agregarTarea,
         validarTarea,
+        eliminarTarea,
       }}
     >
       {props.children}
