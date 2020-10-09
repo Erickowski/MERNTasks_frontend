@@ -10,6 +10,7 @@ import {
   AGREGAR_PROYECTO,
   VALIDAR_FORMULARIO,
   PROYECTO_ACTUAL,
+  ELIMINAR_PROYECTO,
 } from "../../types";
 
 const ProyectoState = (props) => {
@@ -24,14 +25,17 @@ const ProyectoState = (props) => {
     errorformulario: false,
     proyecto: null,
   };
+
   // Dispatch para ejecutar las acciones
   const [state, dispatch] = useReducer(proyectoReducer, initialState);
+
   //   Serie de funciones para el CRUD
   const mostrarFormulario = () => {
     dispatch({
       type: FORMULARIO_PROYECTO,
     });
   };
+
   //   Obtener los proyectos
   const obtenerProyectos = () => {
     dispatch({
@@ -39,6 +43,7 @@ const ProyectoState = (props) => {
       payload: proyectos,
     });
   };
+
   // Agregar nuevo proyecto
   const agregarProyecto = (proyecto) => {
     proyecto.id = uuid();
@@ -48,12 +53,14 @@ const ProyectoState = (props) => {
       payload: proyecto,
     });
   };
+
   //  Validar el formulario por errores
   const mostrarError = () => {
     dispatch({
       type: VALIDAR_FORMULARIO,
     });
   };
+
   //   Selecciona el proyecto que el usuario dio click
   const proyectoActual = (proyectoId) => {
     dispatch({
@@ -61,6 +68,15 @@ const ProyectoState = (props) => {
       payload: proyectoId,
     });
   };
+
+  //   Elimina el proyexto
+  const eliminarProyecto = (proyectoId) => {
+    dispatch({
+      type: ELIMINAR_PROYECTO,
+      payload: proyectoId,
+    });
+  };
+
   return (
     <proyectContext.Provider
       value={{
@@ -73,6 +89,7 @@ const ProyectoState = (props) => {
         agregarProyecto,
         mostrarError,
         proyectoActual,
+        eliminarProyecto,
       }}
     >
       {props.children}

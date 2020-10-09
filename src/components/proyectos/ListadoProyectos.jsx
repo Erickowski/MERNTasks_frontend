@@ -12,7 +12,7 @@ const ListadoProyectos = () => {
   useEffect(() => {
     obtenerProyectos();
   }, []);
-  if (proyectos.length === 0) return null;
+  if (proyectos.length === 0) return <p>No hay proyectos aún.</p>;
   return (
     <ul className="listado-proyectos">
       {proyectos.map((proyecto) => (
