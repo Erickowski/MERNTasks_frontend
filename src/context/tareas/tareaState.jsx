@@ -12,6 +12,7 @@ const TareaState = (props) => {
       { nombre: "Elegir Plataformas de Pago", estado: false, proyectoId: 2 },
       { nombre: "Elegir Hosting", estado: false, proyectoId: 3 },
     ],
+    tareasproyecto: null,
   };
 
   // Crear dispatch y state
@@ -27,7 +28,13 @@ const TareaState = (props) => {
   };
 
   return (
-    <TareaContext.Provider value={{ tareas: state.tareas, obtenerTareas }}>
+    <TareaContext.Provider
+      value={{
+        tareas: state.tareas,
+        tareasproyecto: state.tareasproyecto,
+        obtenerTareas,
+      }}
+    >
       {props.children}
     </TareaContext.Provider>
   );
