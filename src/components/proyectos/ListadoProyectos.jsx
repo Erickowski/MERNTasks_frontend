@@ -19,7 +19,7 @@ const ListadoProyectos = () => {
     <ul className="listado-proyectos">
       <TransitionGroup>
         {proyectos.map((proyecto) => (
-          <CSSTransition key={proyecto.id} classNames="proyecto" timeout={200}>
+          <CSSTransition key={proyecto._id} classNames="proyecto" timeout={200}>
             <Proyecto proyecto={proyecto} />
           </CSSTransition>
         ))}
