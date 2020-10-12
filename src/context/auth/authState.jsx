@@ -97,6 +97,7 @@ const AuthState = ({ children }) => {
         mensaje: state.mensaje,
         registrarUsuario,
         iniciarSesion,
+        usuarioAutenticado,
       }}
     >
       {children}
