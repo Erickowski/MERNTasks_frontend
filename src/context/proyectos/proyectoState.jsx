@@ -1,5 +1,4 @@
 import React, { useReducer } from "react";
-import { v4 as uuid } from "uuid";
 
 import proyectContext from "./proyectoContext";
 import proyectoReducer from "./proyectoReducer";
@@ -12,6 +11,8 @@ import {
   PROYECTO_ACTUAL,
   ELIMINAR_PROYECTO,
 } from "../../types";
+
+import clienteAxios from "../../config/axios";
 
 const ProyectoState = (props) => {
   const proyectos = [
@@ -45,13 +46,18 @@ const ProyectoState = (props) => {
   };
 
   // Agregar nuevo proyecto
-  const agregarProyecto = (proyecto) => {
-    proyecto.id = uuid();
-    // Insertar el proyecto en el state
-    dispatch({
-      type: AGREGAR_PROYECTO,
-      payload: proyecto,
-    });
+  const agregarProyecto = async (proyecto) => {
+    try {
+      const resultado = await clienteAxios.post("/api/proyectos", proyecto);
+      console.log(resultado);
+      // Insertar el proyecto en el state
+      dispatch({
+        type: AGREGAR_PROYECTO,
+        payload: resultado.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   //  Validar el formulario por errores
