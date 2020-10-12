@@ -1,8 +1,9 @@
 import React, { useReducer } from "react";
-import { v4 as uuid } from "uuid";
 
 import TareaContext from "./tareaContext";
 import TareaReducer from "./tareaReducer";
+
+import clienteAxios from "../../config/axios";
 
 import {
   TAREAS_PROYECTO,
@@ -16,18 +17,7 @@ import {
 
 const TareaState = (props) => {
   const initialState = {
-    tareas: [
-      { id: 1, nombre: "Elegir Plataforma", estado: true, proyectoId: 1 },
-      { id: 2, nombre: "Elegir Colores", estado: false, proyectoId: 1 },
-      {
-        id: 3,
-        nombre: "Elegir Plataformas de Pago",
-        estado: false,
-        proyectoId: 2,
-      },
-      { id: 4, nombre: "Elegir Hosting", estado: false, proyectoId: 3 },
-    ],
-    tareasproyecto: null,
+    tareasproyecto: [],
     errortarea: false,
     tareaseleccionada: null,
   };
@@ -45,12 +35,17 @@ const TareaState = (props) => {
   };
 
   // Agregar tarea al proyecto seleccionado
-  const agregarTarea = (tarea) => {
-    tarea.id = uuid();
-    dispatch({
-      type: AGREGAR_TAREA,
-      payload: tarea,
-    });
+  const agregarTarea = async (tarea) => {
+    try {
+      const resultado = await clienteAxios.post("/api/tareas", tarea);
+      console.log(resultado);
+      dispatch({
+        type: AGREGAR_TAREA,
+        payload: tarea,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // Valida y muestra un error en caso de ser necesario
@@ -95,7 +90,6 @@ const TareaState = (props) => {
   return (
     <TareaContext.Provider
       value={{
-        tareas: state.tareas,
         tareasproyecto: state.tareasproyecto,
         errortarea: state.errortarea,
         tareaseleccionada: state.tareaseleccionada,
