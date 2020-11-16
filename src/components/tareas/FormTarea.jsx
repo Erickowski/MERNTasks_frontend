@@ -84,6 +84,7 @@ const FormTarea = () => {
       <form onSubmit={onSubmit}>
         <div className="contenedor-input">
           <input
+            data-cy="input-tarea"
             type="text"
             name="nombre"
             placeholder="Nombre Tarea..."
@@ -95,6 +96,7 @@ const FormTarea = () => {
         </div>
         <div className="contenedor-input">
           <input
+            data-cy="submit-nueva-tarea"
             type="submit"
             value={tareaseleccionada ? "Editar Tarea" : "Agregar Tarea"}
             className="btn btn-primario btn-submit btn-block"
@@ -102,7 +104,9 @@ const FormTarea = () => {
         </div>
       </form>
       {errortarea && (
-        <p className="mensaje error">El nombre de la tarea es obligatorio.</p>
+        <p data-cy="alerta" className="mensaje error">
+          El nombre de la tarea es obligatorio.
+        </p>
       )}
     </div>
   );
