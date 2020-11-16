@@ -21,6 +21,7 @@ const Barra = () => {
       )}
       <nav className="nav-principal">
         <button
+          data-cy="cerrar-sesion"
           className="btn btn-blank cerrar-sesion"
           onClick={() => cerrarSesion()}
         >
