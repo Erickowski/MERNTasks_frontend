@@ -51,4 +51,22 @@ describe("<NuevaCuenta />", () => {
 
     cy.get("[data-cy=cerrar-sesion]").click();
   });
+
+  it("<NuevaCuenta /> - Revisar usuarios duplicados", () => {
+    cy.visit("/nueva-cuenta");
+
+    cy.get("[data-cy=nombre-input]").type("Jessica");
+    cy.get("[data-cy=email-input]").type("correo@correo.com ");
+    cy.get("[data-cy=password-input]").type("123456");
+    cy.get("[data-cy=confirmar-input]").type("123456");
+
+    cy.get("[data-cy=submit-nueva-cuenta]").click();
+
+    cy.get("[data-cy=alerta]")
+      .should("exist")
+      .invoke("text")
+      .should("equal", "El usuario ya existe");
+
+    cy.get("[data-cy=alerta]").should("have.class", "alerta-error");
+  });
 });

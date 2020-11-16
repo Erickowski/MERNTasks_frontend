@@ -1,7 +1,10 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import AlertaContext from "../../context/alertas/alertaContext";
 import AuthContext from "../../context/auth/authContext";
+
+import Alerta from "../layout/Alerta";
 
 const NuevaCuenta = (props) => {
   // Extraer los valores del context
@@ -75,11 +78,7 @@ const NuevaCuenta = (props) => {
   };
   return (
     <div className="form-usuario">
-      {alerta && (
-        <div data-cy="alerta" className={`alerta ${alerta.categoria}`}>
-          {alerta.msg}
-        </div>
-      )}
+      {alerta && <Alerta alerta={alerta} />}
       <div className="contenedor-form sombra-dark">
         <h1 data-cy="titulo">Obtener una cuenta</h1>
         <form onSubmit={iniciarSesion} data-cy="nueva-cuenta">
